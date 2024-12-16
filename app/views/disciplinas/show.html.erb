@@ -1,0 +1,7 @@
+<h1>Detalhes da Disciplina</h1>
+
+<p><strong>Nome:</strong> <%= @disciplina.nome %></p>
+<p><strong>Código:</strong> <%= @disciplina.codigo %></p>
+
+<%= link_to "Editar", edit_disciplina_path(@disciplina) %> |
+<%= link_to "Voltar", disciplinas_path %>

@@ -1,9 +1,26 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Limpar dados existentes
+Matricula.destroy_all
+Disciplina.destroy_all
+Aluno.destroy_all
+
+# Criar alunos
+alunos = 5.times.map do |i|
+  Aluno.create(nome: "Aluno #{i+1}", idade: 20 + i, email: "aluno#{i+1}@email.com")
+end
+
+# Criar disciplinas
+disciplinas = [
+  { nome: "Matemática", codigo: "MAT101" },
+  { nome: "Física", codigo: "FIS101" },
+  { nome: "História", codigo: "HIST101" },
+  { nome: "Química", codigo: "QUI101" },
+  { nome: "Biologia", codigo: "BIO101" },
+  { nome: "Educação Física", codigo: "EDU101" }
+].map { |disciplina| Disciplina.create(disciplina) }
+
+# Criar matrículas
+alunos.each do |aluno|
+  disciplinas.sample(3).each do |disciplina| # Associa 3 disciplinas aleatórias para cada aluno
+    Matricula.create(aluno: aluno, disciplina: disciplina)
+  end
+end

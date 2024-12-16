@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #2C3E50;
+        }
+        a {
+            text-decoration: none;
+            color: #2980B9;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bem-vindo ao Sistema de Controle Acadêmico!</h1>
+    <p>Escolha uma das opções abaixo para navegar:</p>
+    <a href="/alunos">Gerenciar Alunos</a> |
+    <a href="/disciplinas">Gerenciar Disciplinas</a> |
+    <a href="/matriculas">Gerenciar Matrículas</a>
+
+    <%= link_to "Exportar CSV Completo", exportar_csv_path, class: "btn btn-info" %>
+
+</body>
+</html>

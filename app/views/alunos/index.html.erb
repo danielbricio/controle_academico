@@ -1,0 +1,37 @@
+<h1>Lista de Alunos</h1>
+
+<!-- Link para criar um novo aluno -->
+<%= link_to "Novo Aluno", new_aluno_path %>
+<%= link_to "Exportar PDF", alunos_path(format: :pdf), target: "_blank", class: "btn btn-success" %>
+
+
+
+<table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+      <th>Email</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @alunos.each do |aluno| %>
+      <tr>
+        <td><%= aluno.nome %></td>
+        <td><%= aluno.idade %></td>
+        <td><%= aluno.email %></td>
+        <td>
+          <!-- Links de ações -->
+          <%= link_to "Mostrar", aluno_path(aluno) %> |
+          <%= link_to "Editar", edit_aluno_path(aluno) %> |
+          <%= link_to "Excluir", aluno_path(aluno),
+                      data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Adicionar paginação -->
+<%= paginate @alunos %>

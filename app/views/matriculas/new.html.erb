@@ -1,0 +1,15 @@
+<h1>Nova Matrícula</h1>
+
+<%= form_with(model: @matricula) do |form| %>
+  <div>
+    <%= form.label :aluno_id, "Aluno" %>
+    <%= form.collection_select :aluno_id, Aluno.all, :id, :nome, prompt: "Selecione um aluno" %>
+  </div>
+
+  <div>
+    <%= form.label :disciplina_id, "Disciplina" %>
+    <%= form.collection_select :disciplina_id, Disciplina.all, :id, :nome, prompt: "Selecione uma disciplina" %>
+  </div>
+
+  <%= form.submit "Salvar Matrícula", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,32 @@
+<h1>Lista de Matrículas</h1>
+
+<!-- Link para criar uma nova matrícula -->
+<%= link_to "Nova Matrícula", new_matricula_path %>
+
+<table border="1" cellspacing="0" cellpadding="8" style="width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th>Aluno</th>
+      <th>Disciplina</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @matriculas.each do |matricula| %>
+      <tr>
+        <td><%= matricula.aluno.nome %></td>
+        <td><%= matricula.disciplina.nome %></td>
+        <td>
+          <!-- Links de ações -->
+          <%= link_to "Mostrar", matricula_path(matricula) %> |
+          <%= link_to "Editar", edit_matricula_path(matricula) %> |
+          <%= link_to "Excluir", matricula_path(matricula), 
+                        data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Adicionar paginação -->
+<%= paginate @matriculas %>

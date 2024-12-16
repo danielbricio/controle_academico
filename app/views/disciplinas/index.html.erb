@@ -1,0 +1,32 @@
+<h1>Lista de Disciplinas</h1>
+
+<!-- Link para criar nova disciplina -->
+<%= link_to "Nova Disciplina", new_disciplina_path, class: "btn" %>
+
+<table border="1" cellspacing="0" cellpadding="8" style="width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @disciplinas.each do |disciplina| %>
+      <tr>
+        <td><%= disciplina.nome %></td>
+        <td><%= disciplina.codigo %></td>
+        <td>
+          <!-- Ações para cada disciplina -->
+          <%= link_to "Mostrar", disciplina_path(disciplina) %> |
+          <%= link_to "Editar", edit_disciplina_path(disciplina) %> |
+          <%= link_to "Excluir", disciplina_path(disciplina), 
+                        data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Adicionar paginação -->
+<%= paginate @disciplinas %>

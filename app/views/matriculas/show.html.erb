@@ -1,0 +1,18 @@
+<h1>Detalhes da Matrícula</h1>
+
+<p>
+  <strong>Aluno:</strong>
+  <%= @matricula.aluno.nome %>
+</p>
+
+<p>
+  <strong>Disciplina:</strong>
+  <%= @matricula.disciplina.nome %>
+</p>
+
+<%= link_to "Voltar", matriculas_path %>
+<%= link_to "Editar", edit_matricula_path(@matricula), class: "btn btn-warning" %>
+<%= link_to "Excluir", @matricula,
+    data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" },
+    class: "btn btn-danger" %>
+
