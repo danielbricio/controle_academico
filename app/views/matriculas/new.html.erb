@@ -1,15 +1,89 @@
-<h1>Nova Matrícula</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for(:title) || "Nova Matrícula" %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #275BA8;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-<%= form_with(model: @matricula) do |form| %>
-  <div>
-    <%= form.label :aluno_id, "Aluno" %>
-    <%= form.collection_select :aluno_id, Aluno.all, :id, :nome, prompt: "Selecione um aluno" %>
+    .form-container {
+      background-color: #ffffff;
+      color: #333333;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+      width: 50%;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: bold;
+      color: #275BA8;
+      font-size: 2.5rem;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #275BA8;
+      color: #ffffff;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #1D4B8C;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: #ffffff;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Nova Matrícula</h1>
+    <%= form_with(model: @matricula, local: true) do |form| %>
+      <!-- Campo de Aluno -->
+      <div class="mb-3 text-start">
+        <%= form.label :aluno_id, "Aluno" %>
+        <%= form.collection_select :aluno_id, Aluno.all, :id, :nome, prompt: "Selecione um aluno", class: "form-select" %>
+      </div>
+
+      <!-- Campo de Disciplina -->
+      <div class="mb-3 text-start">
+        <%= form.label :disciplina_id, "Disciplina" %>
+        <%= form.collection_select :disciplina_id, Disciplina.all, :id, :nome, prompt: "Selecione uma disciplina", class: "form-select" %>
+      </div>
+
+      <!-- Novo Campo para Upload da Foto -->
+      <div class="mb-3 text-start">
+        <%= form.label :foto, "Foto" %>
+        <%= form.file_field :foto, class: "form-control" %>
+      </div>
+
+      <!-- Botões -->
+      <div class="d-flex justify-content-center gap-3 mt-3">
+        <%= form.submit "Salvar Matrícula", class: "btn btn-primary" %>
+        <%= link_to "Voltar", matriculas_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :disciplina_id, "Disciplina" %>
-    <%= form.collection_select :disciplina_id, Disciplina.all, :id, :nome, prompt: "Selecione uma disciplina" %>
-  </div>
-
-  <%= form.submit "Salvar Matrícula", class: "btn btn-primary" %>
-<% end %>
+</body>
+</html>

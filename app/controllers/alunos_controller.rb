@@ -41,20 +41,27 @@ class AlunosController < ApplicationController
     @alunos = Aluno.page(params[:page]).per(5) # 5 registros por página
     
     # Exportar para PDF
+    # Exportar para PDF
     respond_to do |format|
       format.html
       format.pdf do
         pdf = Prawn::Document.new
         pdf.text "Lista de Alunos", size: 20, style: :bold, align: :center
         pdf.move_down 10
+
+        # Carrega todos os alunos, ignorando a paginação
+        alunos = Aluno.all
+
         table_data = [["Nome", "Idade", "Email"]]
-        @alunos.each do |aluno|
+        alunos.each do |aluno|
           table_data << [aluno.nome, aluno.idade, aluno.email]
         end
+
         pdf.table(table_data, header: true, cell_style: { border_width: 0.5, padding: 5 })
         send_data pdf.render, filename: "alunos.pdf", type: "application/pdf", disposition: "inline"
       end
     end
+
   end
 
   # Mostrar um aluno específico
