@@ -53,6 +53,6 @@ class MatriculasController < ApplicationController
 
   # Definir os parâmetros permitidos
   def matricula_params
-    params.require(:matricula).permit(:aluno_id, :disciplina_id)
+    params.require(:matricula).permit(:aluno_id, :disciplina_id, :foto)
   end
 end

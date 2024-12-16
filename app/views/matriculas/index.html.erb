@@ -1,32 +1,149 @@
-<h1>Lista de Matrículas</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for(:title) || "Lista de Matrículas" %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #275BA8;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
 
-<!-- Link para criar uma nova matrícula -->
-<%= link_to "Nova Matrícula", new_matricula_path %>
+    .header-icon {
+      background-color: #ffffff;
+      border-radius: 12px;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 20px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    }
 
-<table border="1" cellspacing="0" cellpadding="8" style="width: 100%; text-align: left;">
-  <thead>
-    <tr>
-      <th>Aluno</th>
-      <th>Disciplina</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @matriculas.each do |matricula| %>
-      <tr>
-        <td><%= matricula.aluno.nome %></td>
-        <td><%= matricula.disciplina.nome %></td>
-        <td>
-          <!-- Links de ações -->
-          <%= link_to "Mostrar", matricula_path(matricula) %> |
-          <%= link_to "Editar", edit_matricula_path(matricula) %> |
-          <%= link_to "Excluir", matricula_path(matricula), 
-                        data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir?" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    h1 {
+      font-weight: bold;
+      font-size: 36px;
+    }
 
-<!-- Adicionar paginação -->
-<%= paginate @matriculas %>
+    .btn-white {
+      background-color: #ffffff;
+      color: #275BA8;
+      border-radius: 8px;
+      padding: 8px 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-white:hover {
+      background-color: #f1f1f1;
+      color: #1D4B8C;
+    }
+
+    .table-container {
+      margin: 20px auto;
+      width: 70%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      background-color: #ffffff;
+      color: #333333;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #275BA8;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 5px; /* Espaçamento entre botões */
+    }
+
+    .pagination a, 
+    .pagination span {
+      display: inline-block;
+      margin: 0 5px;
+      padding: 2px 4px;
+      text-decoration: none;
+      color: #275BA8;
+      background-color: #ffffff;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .pagination .current {
+      background-color: #ffffff;
+      color: #275BA8;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container text-center mt-5">
+    <!-- Ícone e título -->
+    <div class="header-icon">
+      <%= image_tag 'icones/matriculas.png', alt: "Ícone Matrículas", style: "width: 50px; height: 50px;" %>
+    </div>
+    <h1>Lista de Matrículas</h1>
+
+    <!-- Botão Nova Matrícula -->
+    <div class="d-flex justify-content-center gap-3 mb-3">
+      <%= link_to "NOVA MATRÍCULA", new_matricula_path, class: "btn btn-white" %>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ALUNO</th>
+            <th>DISCIPLINA</th>
+            <th>AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @matriculas.each do |matricula| %>
+            <tr>
+              <td><%= matricula.aluno.nome %></td>
+              <td><%= matricula.disciplina.nome %></td>
+              <td>
+                <div class="action-buttons">
+                  <%= link_to "MOSTRAR", matricula_path(matricula), class: "btn btn-primary btn-sm" %>
+                  <%= link_to "EDITAR", edit_matricula_path(matricula), class: "btn btn-warning btn-sm" %>
+                  <%= button_to "EXCLUIR", matricula_path(matricula), method: :delete, 
+                                data: { confirm: "Tem certeza que deseja excluir?" }, 
+                                class: "btn btn-danger btn-sm" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Paginação + Botão Voltar -->
+    <div class="d-flex justify-content-center align-items-center gap-3 mt-3">
+      <%= paginate @matriculas, class: "pagination justify-content-center" %>
+      <%= link_to "VOLTAR À PÁGINA INICIAL", root_path, class: "btn btn-white btn-sm" %>
+    </div>
+  </div>
+</body>
+</html>
