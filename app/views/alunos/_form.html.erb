@@ -1,18 +1,33 @@
 <%= form_with(model: @aluno, local: true) do |form| %>
-    <div>
-      <%= form.label :nome %>
-      <%= form.text_field :nome %>
-    </div>
-    <div>
-      <%= form.label :idade %>
-      <%= form.number_field :idade %>
-    </div>
-    <div>
-      <%= form.label :email %>
-      <%= form.email_field :email %>
-    </div>
-    <div>
-      <%= form.submit %>
-    </div>
-  <% end %>
+  <!-- Início do formulário -->
   
+  <!-- Campo para o nome do aluno -->
+  <div>
+    <%= form.label :nome %> 
+    <!-- Cria um rótulo (label) para o campo "nome" -->
+    <%= form.text_field :nome %> 
+    <!-- Cria um campo de texto para o usuário preencher o nome -->
+  </div>
+
+  <!-- Campo para a idade do aluno -->
+  <div>
+    <%= form.label :idade %> 
+    <!-- Cria um rótulo (label) para o campo "idade" -->
+    <%= form.number_field :idade %> 
+    <!-- Cria um campo numérico para o usuário preencher a idade -->
+  </div>
+
+  <!-- Campo para o e-mail do aluno -->
+  <div>
+    <%= form.label :email %> 
+    <!-- Cria um rótulo (label) para o campo "email" -->
+    <%= form.email_field :email %> 
+    <!-- Cria um campo específico para o e-mail, validando o formato automaticamente -->
+  </div>
+
+  <!-- Botão de submissão do formulário -->
+  <div>
+    <%= form.submit %> 
+    <!-- Cria um botão de envio que submete os dados para o controlador -->
+  </div>
+<% end %>
